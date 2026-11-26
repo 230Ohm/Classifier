@@ -1,5 +1,7 @@
 """Train and evaluate a message classifier.""" 
 
+import logging
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import make_pipeline
@@ -7,7 +9,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_selection import SelectPercentile, chi2
 from sklearn.metrics import classification_report
 from sklearn.linear_model import LogisticRegression
-import logging
 
 
 def load_data(path="SMSSpamCollection"):
@@ -52,9 +53,9 @@ def main():
 
     spam_probabilities = model.predict_proba(test_messages)[:, spam_index]
 
-    THRESHOLD = 0.5
+    threshold = 0.5
     predictions = [
-        "spam" if probability >= THRESHOLD else "ham"
+        "spam" if probability >= threshold else "ham"
         for probability in spam_probabilities
     ]
 
@@ -63,4 +64,5 @@ def main():
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
     main()

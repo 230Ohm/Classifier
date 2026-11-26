@@ -1,9 +1,12 @@
+"""Test SMS data loading and classifier predictions."""
+
 import numpy as np
 
 from messages import build_model, load_data
 
 
 def test_load_seperated_messages(tmp_path):
+    """Load labels and messages from a tab-separated file."""
     dataset = tmp_path / "messages.tsv"
     dataset.write_text(
         "ham\tSee you after class\n"
@@ -19,6 +22,7 @@ def test_load_seperated_messages(tmp_path):
 
 
 def fits_and_returns():
+    """Verify that predicted probabilities are finite and sum to one."""
     messages = [
         "meet me after class",
         "are we meeting after class",
@@ -41,7 +45,3 @@ def fits_and_returns():
     assert probabilities.shape == (2, 2)
     assert np.all(np.isfinite(probabilities))
     np.testing.assert_allclose(probabilities.sum(axis=1), [1.0, 1.0])
-
-if __name__ == "__main__":
-    main()
-

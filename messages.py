@@ -11,6 +11,7 @@ import logging
 
 
 def load_data(path="SMSSpamCollection"):
+    """Read labels and messages from a tab-separated file."""
     return pd.read_csv(
         path,
         sep="\t",
@@ -20,6 +21,7 @@ def load_data(path="SMSSpamCollection"):
 
 
 def build_model():
+    """Build the spam classification pipeline."""
     return make_pipeline(
         TfidfVectorizer(ngram_range=(1, 2), min_df=2),
         SelectPercentile(score_func=chi2, percentile=20),
@@ -32,6 +34,7 @@ def build_model():
 
 
 def main():
+    """Train the classifier and log its evaluation and a sample prediction."""
     data = load_data()
 
     train_messages, test_messages, train_labels, test_labels = train_test_split(

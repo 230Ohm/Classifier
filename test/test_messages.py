@@ -3,7 +3,7 @@ import numpy as np
 from messages import build_model, load_data
 
 
-def test_load_data_reads_tab_separated_messages(tmp_path):
+def test_load_seperated_messages(tmp_path):
     dataset = tmp_path / "messages.tsv"
     dataset.write_text(
         "ham\tSee you after class\n"
@@ -18,7 +18,7 @@ def test_load_data_reads_tab_separated_messages(tmp_path):
     assert len(data) == 2
 
 
-def test_model_fits_and_returns_probabilities():
+def fits_and_returns():
     messages = [
         "meet me after class",
         "are we meeting after class",

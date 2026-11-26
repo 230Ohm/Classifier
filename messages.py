@@ -1,3 +1,5 @@
+"""Train and evaluate a message classifier.""" 
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import make_pipeline
@@ -43,11 +45,12 @@ def main():
     model.fit(train_messages, train_labels)
 
     spam_index = list(model.classes_).index("spam")
+
     spam_probabilities = model.predict_proba(test_messages)[:, spam_index]
 
-    threshold = 0.5
+    THRESHOLD = 0.5
     predictions = [
-        "spam" if probability >= threshold else "ham"
+        "spam" if probability >= THRESHOLD else "ham"
         for probability in spam_probabilities
     ]
 

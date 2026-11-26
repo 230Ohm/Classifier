@@ -7,6 +7,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_selection import SelectPercentile, chi2
 from sklearn.metrics import classification_report
 from sklearn.linear_model import LogisticRegression
+import logging
 
 
 def load_data(path="SMSSpamCollection"):
@@ -54,8 +55,8 @@ def main():
         for probability in spam_probabilities
     ]
 
-    print(classification_report(test_labels, predictions))
-    print(model.predict(["Congratulations, you won a prize!"]))
+    logging.info(classification_report(test_labels, predictions))
+    logging.info(model.predict(["Congratulations, you won a prize!"]))
 
 
 if __name__ == "__main__":
